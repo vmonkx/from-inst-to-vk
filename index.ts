@@ -45,7 +45,10 @@ bot.start(async (ctx) => {
 
 // Launch bot
 // eslint-disable-next-line @typescript-eslint/no-floating-promises
-bot.launch();
+/* bot.launch(); */
+
+bot.telegram.setWebhook(`${process.env.URL}/bot${process.env.BOT_TOKEN}`);
+bot.startWebhook(`/bot${process.env.BOT_TOKEN}`, null, process.env.PORT);
 
 // Enable graceful stop
 process.once("SIGINT", () => bot.stop("SIGINT"));
