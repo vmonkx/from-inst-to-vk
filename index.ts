@@ -48,7 +48,13 @@ bot.start(async (ctx) => {
 /* bot.launch(); */
 
 bot.telegram.setWebhook(`${process.env.URL}/bot${process.env.BOT_TOKEN}`);
-bot.startWebhook(`/bot${process.env.BOT_TOKEN}`, null, process.env.PORT);
+bot.launch({
+  webhook: {
+    port: parseInt(process.env.PORT),
+    tlsOptions: null,
+    hookPath: `/bot${process.env.BOT_TOKEN}`,
+  },
+});
 
 // Enable graceful stop
 process.once("SIGINT", () => bot.stop("SIGINT"));
