@@ -12,11 +12,15 @@ interface ParamsSendStoriesVk {
 
 function getUploadURLVk(methodName, params = {}) {
   return axios
-    .post(`${process.env.VK_API}${methodName}?${params}&add_to_news=1&v=${process.env.VK_VERSION_API}`)
+    .post(
+      `${process.env.VK_API}${methodName}?${params}&add_to_news=1&v=${process.env.VK_VERSION_API}`
+    )
     .then((response) => {
       return response.data.response.upload_url;
     })
     .catch((err) => {
+      console.warn("getUploadURLVk", err);
+
       throw err;
     });
 }
@@ -32,6 +36,8 @@ export async function uploadStoriesVk(uploadUrl, formData) {
       }
     })
     .catch((err) => {
+      console.warn("uploadStoriesVk", err);
+
       throw err;
     });
 }
@@ -49,6 +55,7 @@ async function saveStoriesVk(upload_result, access_token) {
       }
     })
     .catch((err) => {
+      console.warn("saveStoriesVk", err);
       throw err;
     });
 }
@@ -70,6 +77,7 @@ export async function sendStoriesToVk(
     const res = await saveStoriesVk(uploadResult, params.access_token);
     return res;
   } catch (error) {
+    console.warn("sendStoriesToVk", error);
     throw error;
   }
 }

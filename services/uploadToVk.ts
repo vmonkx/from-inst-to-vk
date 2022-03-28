@@ -14,6 +14,8 @@ export const uploadMediaToVK = async (
     });
     return res;
   } catch (error) {
+    console.warn("uploadMediaToVK", error);
+
     throw error;
   }
 };

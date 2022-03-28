@@ -104,6 +104,8 @@ export async function uploadMediaFileStories(link, media_type) {
       return formData;
     })
     .catch((err) => {
+      console.warn("uploadMediaFileStories", err);
+
       throw err;
     });
 }
