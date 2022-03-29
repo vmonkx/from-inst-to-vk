@@ -16,6 +16,8 @@ function getUploadURLVk(methodName, params = {}) {
       `${process.env.VK_API}${methodName}?${params}&add_to_news=1&v=${process.env.VK_VERSION_API}`
     )
     .then((response) => {
+      console.warn("response", response.data);
+
       return response.data.response.upload_url;
     })
     .catch((err) => {
